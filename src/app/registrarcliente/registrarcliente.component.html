@@ -1,0 +1,164 @@
+<div class="container" style="margin-top:10%;">
+   <div class="animated fadeIn">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="card">
+                    <form action="form-horizontal" [formGroup]="clientesForm" (ngSubmit)="onRegisterSubmit(clientesForm)">
+                      <div class="card-header">
+                        <strong>{{ title }}</strong>
+                        <div class="card-actions">
+                          <a href="#" class="btn-setting text-primary" [routerLink]="['/clientes']">
+                            <i class="icon-arrow-left-circle"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-md-3 form-control-label" for="nom_cliente"></label>
+                          <div class="col-md-9">
+                            <input type="text" formControlName="nom_cliente" class="form-control" name="nom_cliente" placeholder="Ingrese Nombre:"/> 
+                            <span *ngIf="clientesForm.controls['nom_cliente'].invalid && clientesForm.controls['nom_cliente'].touched" class="hepl-block text-danger">
+                              *Este campo es requerido  
+                            </span> 
+                          </div>
+                        </div> 
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="ape_paterno"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" placeholder="Ingrese Apellido Paterno:"/> 
+                              <span *ngIf="clientesForm.controls['ape_paterno'].invalid && clientesForm.controls['ape_paterno'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="ape_materno"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="ape_materno" class="form-control" name="ape_materno" placeholder="Ingrese Apellido Materno:"/> 
+                              <span *ngIf="clientesForm.controls['ape_materno'].invalid && clientesForm.controls['ape_materno'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="rfc"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="rfc" class="form-control" name="rfc" placeholder="RFC"/> 
+                              <span *ngIf="clientesForm.controls['rfc'].invalid && clientesForm.controls['rfc'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div>
+                        <div class="card-footer clearfix">
+                          <div class="group-buttons float-right">
+                            <button *ngIf="!id" (click)="resetFormulario()" class="btn btn-lg btn-warning" type="reset">
+                              <i class="fa fa-ban"></i>
+                              Limpiar
+                            </button>
+                            <button type="button" class="btn btn-lg btn-success" routerLink="/clientes">Cancelar</button>
+                            <button type="submit" class="btn btn-lg btn-success" [disabled]="!clientesForm.valid">Guardar</button>
+                          </div>
+                        </div> 
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>  
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+  <div class="container" style="margin-top:10%;">
+   <div class="animated fadeIn">
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="card">
+                    <form action="form-horizontal" [formGroup]="clientesForm" (ngSubmit)="enviar()">
+                      <div class="card-header">
+                        <strong>{{ title }}</strong>
+                        <div class="card-actions">
+                          <a href="#" class="btn-setting text-primary" [routerLink]="['/clientes']">
+                            <i class="icon-arrow-left-circle"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-md-3 form-control-label" for="nom_cliente"></label>
+                          <div class="col-md-9">
+                            <input type="text" formControlName="nom_cliente" class="form-control" name="nom_cliente" placeholder="Ingrese Nombre:"/> 
+                            <span *ngIf="clientesForm.controls['nom_cliente'].invalid && clientesForm.controls['nom_cliente'].touched" class="hepl-block text-danger">
+                              *Este campo es requerido  
+                            </span> 
+                          </div>
+                        </div> 
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="ape_paterno"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" placeholder="Ingrese Apellido Paterno:"/> 
+                              <span *ngIf="clientesForm.controls['ape_paterno'].invalid && clientesForm.controls['ape_paterno'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="ape_materno"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="ape_materno" class="form-control" name="ape_materno" placeholder="Ingrese Apellido Materno:"/> 
+                              <span *ngIf="clientesForm.controls['ape_materno'].invalid && clientesForm.controls['ape_materno'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="rfc"></label>
+                            <div class="col-md-9">
+                              <input type="text" formControlName="rfc" class="form-control" name="rfc" placeholder="RFC"/> 
+                              <span *ngIf="clientesForm.controls['rfc'].invalid && clientesForm.controls['rfc'].touched" class="hepl-block text-danger">
+                                *Este campo es requerido  
+                              </span> 
+                            </div>
+                        </div>
+                        <div class="card-footer clearfix">
+                          <div class="group-buttons float-right">
+                            <button *ngIf="!id" (click)="resetFormulario()" class="btn btn-lg btn-warning" type="reset">
+                              <i class="fa fa-ban"></i>
+                              Limpiar
+                            </button>
+                            <button type="button" class="btn btn-lg btn-success" routerLink="/clientes">Cancelar</button>
+                            <button type="submit" class="btn btn-lg btn-success" [disabled]="!clientesForm.valid">Guardar</button>
+                          </div>
+                        </div> 
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>  
+            </div>
+</div>
+
+-->

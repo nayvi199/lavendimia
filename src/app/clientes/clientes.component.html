@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row" style="margin-top: 15px;">
+      <p-toast key="myKey2" position="top-left" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
+  </div>
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-2">
+        <p class="text-info">Clientes Registrados</p>
+        </div>
+      <div class="col-md-3 offset-md-9">
+        <button type="button" class="btn btn-lg btn-primary" routerLink="/registrarcliente">
+          <span class="glyphicon glyphicon-search"></span> (+) Nuevo Cliente
+        </button>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 15px;">
+      <p-table [value]="clientes">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Clave Cliente</th>
+            <th>Nombre</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cliente>
+          <tr>
+            <td>{{ cliente.idu_cliente }}</td>
+            <td>{{ cliente.nombre +" "+ cliente.ape_paterno +" "+ cliente.ape_materno }}</td>
+            <td>
+                <a href="#" [routerLink]="['/editarcliente',cliente.idu_cliente]" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+              <button (click)="eliminar(cliente.idu_cliente)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+            </td> 
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>

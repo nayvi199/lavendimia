@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-md-3 offset-md-9">
+      <button type="button" class="btn btn-lg btn-primary">
+        <span class="glyphicon glyphicon-search"></span> (+) Nueva Venta
+      </button>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 15px;">
+    <p-table [value]="ventas">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Folio</th>
+          <th>Cliente</th>
+          <th>Importe</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-vent>
+        <tr>
+          <td>{{ vent.idu_folio }}</td>
+          <td>{{ vent.idu_cliente }}</td>
+          <td>{{ vent.imp_total }}</td>
+          <td>{{ vent.num_fecha }}</td>
+          <td>{{ vent.idu_estatus }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
