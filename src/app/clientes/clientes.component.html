@@ -3,10 +3,10 @@
       <p-toast key="myKey2" position="top-right" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
   </div>
     <div class="row" style="margin-top: 15px;">
-        <div class="col-md-2">
-        <p class="text-info">Clientes Registrados</p>
+        <div class="col-md-3">
+        <h4><strong><p class="text-info">Clientes Registrados</p></strong></h4>
         </div>
-      <div class="col-md-3 offset-md-9">
+      <div class="col-md-3 offset-md-6">
         <button type="button" class="btn btn-lg btn-primary" routerLink="/registrarcliente">
           <i class="fa fa-plus"></i> Nuevo Cliente
         </button>
@@ -27,7 +27,7 @@
             <td>{{ cliente.nombre +" "+ cliente.ape_paterno +" "+ cliente.ape_materno }}</td>
             <td>
                 <a href="#" [routerLink]="['/editarcliente',cliente.idu_cliente]" class="btn btn-info"><i class="fa fa-pencil"></i></a>
-              <button (click)="eliminar(cliente.idu_cliente)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                <button (click)="eliminar(cliente.idu_cliente)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
             </td> 
           </tr>
         </ng-template>

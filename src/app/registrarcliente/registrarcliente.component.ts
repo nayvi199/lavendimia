@@ -7,6 +7,7 @@ import { ServiceLService } from '../services/service-l.service';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
 import {MessageService} from 'primeng/api';
+import {Message} from 'primeng//api';
 
 @Component({
   selector: 'app-registrarcliente',
@@ -15,6 +16,7 @@ import {MessageService} from 'primeng/api';
   providers: [MessageService]
 })
 export class RegistrarclienteComponent implements OnInit, OnDestroy {
+  [x: string]: any;
   clientesForm: FormGroup;
   cliente: ICliente;
   clienteNU: ICliente;
@@ -25,6 +27,8 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   fechaRandom: string;
   parametros: { nombre: string, RFC: string, ape_paterno: string, ape_materno: string }[];
   rfcAuto: string;
+  msgs: { severity: string, summary: string, detail: string} [];
+  // msgs = 'Bien Hecho, se ha ACTUALIZADO con exito.';
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
@@ -96,8 +100,9 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
     if (id != null) {
       console.log('entro a Llamar PUT');
       this.serviceL.sendPutCliente(this.clienteNU).subscribe((resp) => {
-        this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
+        this.messageService.add({ key: 'myKey3', severity: 'success', summary: 'Notificacion',
         detail: 'Bien Hecho. El cliente ha sido actualizado correctamente'});
+        this.showSuccess();
         form.reset(); // reset formulario
         setTimeout(() => { }, 5000);
         this.regresar();
@@ -105,7 +110,7 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
     } else {
       console.log('entro a Llamar POST');
       this.serviceL.sendPostCliente(this.clienteNU).subscribe((resp) => {
-        this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
+        this.messageService.add({ key: 'myKey3', severity: 'success', summary: 'Notificacion',
         detail: 'Bien Hecho. El cliente ha sido registrado correctamente'});
         form.reset(); // reset formulario
         setTimeout(() => { }, 5000);
@@ -118,6 +123,11 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
       form.reset(); // reset form to empty
     });*/
   }
+
+  showSuccess() {
+    this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+    // this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+}
 
   /*Forma de Llamarse
   <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" 
@@ -182,10 +192,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
       mes = Math.round(Math.random() * (12 - 10) + 10);
       dia = Math.round(Math.random() * (30 - 10) + 10);
       this.fechaRandom = (anio.toString().charAt(2) + anio.toString().charAt(3)) + (mes.toString()) + (dia.toString());
-      console.log('anio' + anio);
-      console.log('mes' + mes);
-      console.log('dia' + dia);
-      console.log('fecha' + this.fechaRandom);
   }
 
   ngOnDestroy() {

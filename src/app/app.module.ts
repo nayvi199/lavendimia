@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegistrarclienteComponent } from './registrarcliente/registrarcliente.component';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MessageModule} from 'primeng/message';
+import {MessagesModule} from 'primeng/messages';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +50,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TableModule,
     HttpClientModule,
     ToastModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
