@@ -32,7 +32,6 @@ export class ClientesComponent implements OnInit {
   cargarClientesRegistrados() {
     this.serviceL.sendGetClientes().subscribe( (resp) => {
       this.clientes = resp;
-      console.log('clientes' + this.clientes);
    },
    (error) => {
     console.log('ocurrio un error en cargarClientesRegistrados(): ' + error);
@@ -52,7 +51,8 @@ export class ClientesComponent implements OnInit {
       if (result.value) {
         // mandar llamar el servicio
         this.serviceL.sendDeleteCliente(id).subscribe( (resp) => {
-          this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion', detail: 'Eliminado con exito.'});
+          this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
+           detail: 'Bien Hecho. El cliente ha sido eliminado correctamente.'});
         },
         (error) => {
           this.messageService.add({ key: 'myKey2', severity: 'error', summary: 'Notificacion', detail: 'Error: No fue eliminado.'});
@@ -63,6 +63,7 @@ export class ClientesComponent implements OnInit {
           'Fue eliminado',
           'success'
         );
+        this.cargarClientesRegistrados();
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === swal.DismissReason.cancel

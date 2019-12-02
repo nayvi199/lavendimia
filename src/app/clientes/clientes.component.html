@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" style="margin-top: 15px;">
-      <p-toast key="myKey2" position="top-left" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
+      <p-toast key="myKey2" position="top-right" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
   </div>
     <div class="row" style="margin-top: 15px;">
         <div class="col-md-2">
@@ -12,7 +12,7 @@
         </button>
       </div>
     </div>
-    <div class="row" style="margin-top: 15px;">
+    <div class="row animated fadeIn" style="margin-top: 15px;">
       <p-table [value]="clientes" [paginator]="true" [rows]="10">
         <ng-template pTemplate="header">
           <tr>

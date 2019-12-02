@@ -61,15 +61,18 @@ export class ServiceLService {
     return this.httpClient.post('/RESTful/webresources/venta/add', venta);
   }
   public sendPostCliente(cliente: ICliente): Observable<any> {
-    console.log('entro a sendPostCliente');
-    return this.httpClient.post('/RESTful/webresources/generic/add', cliente);
+    if (cliente.idu_cliente == null) {
+      cliente.idu_cliente = 0;
+    }
+    console.log('entro a sendPostCliente' + cliente.RFC);
+    return this.httpClient.post('/RESTful/webresources/generic/add/', cliente);
   }
   public sendPostArticulo(articulo: IArticulo): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/articulo/add', articulo);
+    return this.httpClient.post('/RESTful/webresources/articulo/add/', articulo);
   }
 
   public sendPostConfiguracion(confi: IConfiguracion): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/confi/add', confi);
+    return this.httpClient.post('/RESTful/webresources/confi/add/', confi);
   }
 
   // metodos modificar

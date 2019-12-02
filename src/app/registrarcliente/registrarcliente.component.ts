@@ -6,11 +6,13 @@ import { ICliente } from '../models/cliente';
 import { ServiceLService } from '../services/service-l.service';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-registrarcliente',
   templateUrl: './registrarcliente.component.html',
-  styleUrls: ['./registrarcliente.component.css']
+  styleUrls: ['./registrarcliente.component.css'],
+  providers: [MessageService]
 })
 export class RegistrarclienteComponent implements OnInit, OnDestroy {
   clientesForm: FormGroup;
@@ -27,14 +29,14 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private http: HttpClient,
-              private serviceL: ServiceLService
+              private serviceL: ServiceLService,
+              private messageService: MessageService
     ) { }
 
   ngOnInit() {
     this.inicializarForm();
     this.sub = this.route.params.subscribe((params) => {
       this.id = params.id;
-      console.log('id:' + this.id);
       this.title = this.id ? 'Editar Cliente -' : 'Nuevo Cliente';
       if (this.id) {
         /*this.generosService.obtenerGeneroPorId(this.id).subscribe((result) => {
@@ -44,8 +46,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
         });*/
         this.serviceL.sendGetCliente(this.id).subscribe((resp) => {
           this.cliente = resp[0];
-          const resp2 = resp;
-          this.resp2 = resp[0];
           console.log('resp1' + this.cliente);
           console.log(Object.keys(resp));
           console.log(Object.values(this.cliente));
@@ -71,9 +71,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   );
   }
 
-  registrarCliente() {
-    console.log('entro registrar cliente');
-  }
   public resetFormulario() {
     this.fechaRandom = '';
     this.clientesForm.reset();
@@ -96,20 +93,22 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
                       ape_paterno: form.getRawValue().ape_paterno,
                       ape_materno: form.getRawValue().ape_materno,
                       RFC: form.getRawValue().rfc };
-    console.log('Entro a onRegisterSubmit, id: ' + id);
-    console.log('contenidoform:' + form);
     if (id != null) {
       console.log('entro a Llamar PUT');
       this.serviceL.sendPutCliente(this.clienteNU).subscribe((resp) => {
-        console.log('entro sendPUTCliente' + resp);
-        form.reset(); // reset form to empty
+        this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
+        detail: 'Bien Hecho. El cliente ha sido actualizado correctamente'});
+        form.reset(); // reset formulario
+        setTimeout(() => { }, 5000);
         this.regresar();
       });
     } else {
       console.log('entro a Llamar POST');
       this.serviceL.sendPostCliente(this.clienteNU).subscribe((resp) => {
-        console.log('entro sendPostCliente' + resp);
-        form.reset(); // reset form to empty
+        this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
+        detail: 'Bien Hecho. El cliente ha sido registrado correctamente'});
+        form.reset(); // reset formulario
+        setTimeout(() => { }, 5000);
         this.regresar();
       });
     }
@@ -124,10 +123,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" 
   placeholder="Ingrese Apellido Paterno:" (ngModelChange)="onChangeServicio($event)"/> 
   */
-
-  onChangeServicio(event) {
-    console.log('entro a myfuncion' + event);
-  }
 
   autoCompletarRFC() {
     let nom = (this.clientesForm.getRawValue().nom_cliente);
