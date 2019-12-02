@@ -20,6 +20,7 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   id: number;
   sub: any;
   resp2: any;
+  fechaRandom: string;
   parametros: { nombre: string, RFC: string, ape_paterno: string, ape_materno: string }[];
   rfcAuto: string;
   constructor(private fb: FormBuilder,
@@ -31,7 +32,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.inicializarForm();
-    this.generarFechaAleatoria();
     this.sub = this.route.params.subscribe((params) => {
       this.id = params.id;
       console.log('id:' + this.id);
@@ -75,6 +75,7 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
     console.log('entro registrar cliente');
   }
   public resetFormulario() {
+    this.fechaRandom = '';
     this.clientesForm.reset();
   }
 
@@ -84,17 +85,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
 
   enviar() {
     console.log(this.resp2.nombre);
-    /*this.parametros.push({
-      nombre: this.resp2.nombre,
-      RFC: this.resp2.RFC,
-      ape_paterno: this.resp2.ape_paterno,
-      ape_materno: this.resp2.ape_materno
-    });*/
-    /*
-    const prueba: { idu_cliente: number, nombre: string, RFC: string, ape_paterno: string, ape_materno: string }[] = [{
-      'idu_cliente': 1, 'nombre': 'Naibi Irasema', 'RFC': 'CIIN', 'ape_paterno': 'CHIQUETEE', 'ape_materno': 'Ibarra'
-    }];
-    */
   }
 
   onRegisterSubmit(form) {
@@ -140,17 +130,25 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   }
 
   autoCompletarRFC() {
-    const nom = (this.clientesForm.getRawValue().nom_cliente).toUpperCase();
-    const apeP = (this.clientesForm.getRawValue().ape_paterno).toUpperCase();
-    const apeM = (this.clientesForm.getRawValue().ape_materno).toUpperCase();
-    const arr = [];
-    if (nom != null && apeP != null && apeM) {
+    let nom = (this.clientesForm.getRawValue().nom_cliente);
+    let apeP = (this.clientesForm.getRawValue().ape_paterno);
+    let apeM = (this.clientesForm.getRawValue().ape_materno);
+    if (nom == null || apeP == null || apeM == null) {
+      this.clientesForm.controls.rfc.setValue('');
+      this.rfcAuto = '';
+      this.fechaRandom = '';
+    }
+
+    if (nom != null && apeP != null && apeM != null) {
+      nom = nom.toUpperCase();
+      apeP = apeP.toUpperCase();
+      apeM = apeM.toUpperCase();
        // Buscar primero vocal en apellido
-       let i1 = (apeP.indexOf('A'));
-       let i2 = (apeP.indexOf('E'));
-       let i3 = (apeP.indexOf('I'));
-       let i4 = (apeP.indexOf('O'));
-       let i5 = (apeP.indexOf('U'));
+      let i1 = (apeP.indexOf('A'));
+      let i2 = (apeP.indexOf('E'));
+      let i3 = (apeP.indexOf('I'));
+      let i4 = (apeP.indexOf('O'));
+      let i5 = (apeP.indexOf('U'));
        /*console.log('i1: ' + i1);
        console.log('i2: ' + i2);
        console.log('i3: ' + i3);
@@ -159,42 +157,40 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
        if (i1 == -1 || i1 == 0) {
         i1 = 20;
        }
-       if (i2 == -1 || i2 == 0) {
+      if (i2 == -1 || i2 == 0) {
         i2 = 20;
        }
-       if (i3 == -1 || i3 == 0) {
+      if (i3 == -1 || i3 == 0) {
         i3 = 20;
        }
-       if (i4 == -1 || i4 == 0) {
+      if (i4 == -1 || i4 == 0) {
         i4 = 20;
        }
-       if (i5 == -1 || i5 == 0) {
+      if (i5 == -1 || i5 == 0) {
         i5 = 20;
        }
-       let indice = Math.min(i1, i2, i3, i4, i5);
-       if ( indice == -1) {
+      let indice = Math.min(i1, i2, i3, i4, i5);
+      if ( indice == -1) {
            indice = 1;
        }
-       this.rfcAuto = ((apeP.charAt(0) + apeP.charAt(indice)) + (apeM.charAt(0)) + (nom.charAt(0)) );
-       this.clientesForm.controls.rfc.setValue(this.rfcAuto);
+      this.generarFechaAleatoria();
+      this.rfcAuto = ((apeP.charAt(0) + apeP.charAt(indice)) + (apeM.charAt(0)) + (nom.charAt(0)) ) + this.fechaRandom;
+      this.clientesForm.controls.rfc.setValue(this.rfcAuto);
     }
   }
 
   generarFechaAleatoria() {
       let anio;
       let mes;
-      let mes1;
       let dia;
-      let dia2;
-      anio = Math.round(Math.random() * (2019 - 1980) + 1990);
-      mes = Math.round(Math.random() * (12 - 0o1) + 0o1);
-      dia = Math.round(Math.random() * (30 - 0o1) + 0o1);
+      anio = Math.round(Math.random() * (2019 - 1980) + 1980);
+      mes = Math.round(Math.random() * (12 - 10) + 10);
+      dia = Math.round(Math.random() * (30 - 10) + 10);
+      this.fechaRandom = (anio.toString().charAt(2) + anio.toString().charAt(3)) + (mes.toString()) + (dia.toString());
       console.log('anio' + anio);
       console.log('mes' + mes);
       console.log('dia' + dia);
-      if (dia.lenght == 0 ) {
-        
-      }
+      console.log('fecha' + this.fechaRandom);
   }
 
   ngOnDestroy() {
