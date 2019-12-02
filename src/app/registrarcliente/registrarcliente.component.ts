@@ -14,11 +14,13 @@ import { HttpClient } from '@angular/common/http';
 export class RegistrarclienteComponent implements OnInit, OnDestroy {
   clientesForm: FormGroup;
   cliente: ICliente;
+  clienteNU: ICliente;
   title: string;
   id: number;
   sub: any;
   resp2: any;
   parametros: { nombre: string, RFC: string, ape_paterno: string, ape_materno: string }[];
+  rfcAuto: string;
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
@@ -46,7 +48,6 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
           console.log('resp1' + this.cliente);
           console.log(Object.keys(resp));
           console.log(Object.values(this.cliente));
-          this.title += this.cliente.nom_cliente;
           this.inicializarFormulario();
           },
           (error) => {
@@ -98,16 +99,38 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   onRegisterSubmit(form) {
     // since field is disabled, we need to use 'getRawValue'
     const id = form.getRawValue().id;
+    // Insertar datos nuevos a Interfaz
+    this.clienteNU = {idu_cliente: id,
+                      nombre: form.getRawValue().nom_cliente,
+                      ape_paterno: form.getRawValue().ape_paterno,
+                      ape_materno: form.getRawValue().ape_materno,
+                      RFC: form.getRawValue().rfc };
+    console.log('Entro a onRegisterSubmit, id: ' + id);
+    console.log('contenidoform:' + form);
     if (id != null) {
-      this.serviceL.sendPutCliente(this.cliente).subscribe((resp) => {
-        console.log('entro sendPostCliente' + resp);
+      console.log('entro a Llamar PUT');
+      this.serviceL.sendPutCliente(this.clienteNU).subscribe((resp) => {
+        console.log('entro sendPUTCliente' + resp);
+        form.reset(); // reset form to empty
+        this.regresar();
       });
     } else {
-      this.serviceL.sendPostCliente(this.cliente).subscribe((resp) => {
+      console.log('entro a Llamar POST');
+      this.serviceL.sendPostCliente(this.clienteNU).subscribe((resp) => {
         console.log('entro sendPostCliente' + resp);
+        form.reset(); // reset form to empty
+        this.regresar();
       });
     }
-    form.reset(); // reset form to empty
+    /*
+    this.serviceL.sendPutCliente(this.clienteNU).subscribe((resp) => {
+      console.log('entro sendPutCliente' + resp);
+      form.reset(); // reset form to empty
+    });*/
+  }
+
+  myFunction() {
+    console.log('entro a myfuncion');
   }
 
 
@@ -118,10 +141,10 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   inicializarFormulario() {
     this.clientesForm.setValue({
       id: this.id ? this.id : null,
-      nom_cliente: this.resp2.nombre,
-      ape_paterno: this.resp2.ape_paterno,
-      ape_materno: this.resp2.ape_materno,
-      rfc: this.resp2.RFC,
+      nom_cliente: this.cliente.nombre,
+      ape_paterno: this.cliente.ape_paterno,
+      ape_materno: this.cliente.ape_materno,
+      rfc: this.cliente.RFC,
     });
   }
 }

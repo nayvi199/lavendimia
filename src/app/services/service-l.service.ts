@@ -20,6 +20,7 @@ export class ServiceLService {
     return this.httpClient.get('/RESTful/webresources/venta/all');
   }
   public sendGetClientes(): Observable<any> {
+    console.log('entro a sendGetClientes');
     return this.httpClient.get('/RESTful/webresources/generic/all');
   }
   public sendGetArticulos(): Observable<any> {
@@ -31,6 +32,7 @@ export class ServiceLService {
 
   // obtener registros especificos
   public sendGetCliente(id: number, parametros?: any): Observable<any> {
+    console.log('entro a sendGetCliente');
     return this.httpClient.get('/RESTful/webresources/generic/all/' + id, {params: parametros});
   }
   public sendGetVenta(id: number, parametros?: any): Observable<any> {
@@ -59,6 +61,7 @@ export class ServiceLService {
     return this.httpClient.post('/RESTful/webresources/venta/add', venta);
   }
   public sendPostCliente(cliente: ICliente): Observable<any> {
+    console.log('entro a sendPostCliente');
     return this.httpClient.post('/RESTful/webresources/generic/add', cliente);
   }
   public sendPostArticulo(articulo: IArticulo): Observable<any> {
@@ -71,17 +74,17 @@ export class ServiceLService {
 
   // metodos modificar
   public sendPutVenta(venta: IVenta): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/venta/', venta);
+    return this.httpClient.put('/RESTful/webresources/venta/', venta);
   }
   public sendPutCliente(cliente: ICliente): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/generic/', cliente);
+    return this.httpClient.put('/RESTful/webresources/generic/', cliente);
   }
   public sendPutArticulo(articulo: IArticulo): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/articulo/', articulo);
+    return this.httpClient.put('/RESTful/webresources/articulo/', articulo);
   }
 
   public sendPutConfiguracion(confi: IConfiguracion): Observable<any> {
-    return this.httpClient.post('/RESTful/webresources/confi/', confi);
+    return this.httpClient.put('/RESTful/webresources/confi/', confi);
   }
 
   // metodos para eliminar
