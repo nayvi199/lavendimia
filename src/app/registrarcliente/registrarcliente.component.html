@@ -5,7 +5,7 @@
                   <div class="card border-primary" >
                     <form action="form-horizontal" [formGroup]="clientesForm" (ngSubmit)="onRegisterSubmit(clientesForm)">
                       <div class="card-header bg-primary text-white">
-                        <strong>{{ title }}</strong>
+                        <h3><strong>{{ title }}</strong></h3>
                         <div class="card-actions">
                           <a href="#" class="btn-setting text-primary" [routerLink]="['/clientes']">
                             <i class="icon-arrow-left-circle"></i>
@@ -16,7 +16,7 @@
                         <div class="form-group row">
                           <label class="col-md-3 form-control-label" for="nom_cliente">Nombre</label>
                           <div class="col-md-9">
-                            <input type="text" formControlName="nom_cliente" class="form-control" name="nom_cliente" placeholder="Ingrese Nombre:"/> 
+                            <input type="text" formControlName="nom_cliente" class="form-control" name="nom_cliente" placeholder="Ingrese Nombre:" (ngModelChange)="autoCompletarRFC()"/> 
                             <span *ngIf="clientesForm.controls['nom_cliente'].invalid && clientesForm.controls['nom_cliente'].touched" class="hepl-block text-danger">
                               *Este campo es requerido  
                             </span> 
@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="ape_paterno">Apellido Paterno</label>
                             <div class="col-md-9">
-                              <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" placeholder="Ingrese Apellido Paterno:"/> 
+                              <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" placeholder="Ingrese Apellido Paterno:" (ngModelChange)="autoCompletarRFC()"/> 
                               <span *ngIf="clientesForm.controls['ape_paterno'].invalid && clientesForm.controls['ape_paterno'].touched" class="hepl-block text-danger">
                                 *Este campo es requerido  
                               </span> 
@@ -34,7 +34,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="ape_materno">Apellido Materno</label>
                             <div class="col-md-9">
-                              <input type="text" formControlName="ape_materno" class="form-control" name="ape_materno" placeholder="Ingrese Apellido Materno:"/> 
+                              <input type="text" formControlName="ape_materno" class="form-control" name="ape_materno" placeholder="Ingrese Apellido Materno:" (ngModelChange)="autoCompletarRFC()"/> 
                               <span *ngIf="clientesForm.controls['ape_materno'].invalid && clientesForm.controls['ape_materno'].touched" class="hepl-block text-danger">
                                 *Este campo es requerido  
                               </span> 
@@ -43,7 +43,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="rfc">RFC</label>
                             <div class="col-md-9">
-                              <input type="text" formControlName="rfc" class="form-control" name="rfc" placeholder="RFC"  onChange="myFunction()"/> 
+                              <input type="text" formControlName="rfc" class="form-control" name="rfc" placeholder="RFC"/> 
                               <span *ngIf="clientesForm.controls['rfc'].invalid && clientesForm.controls['rfc'].touched" class="hepl-block text-danger">
                                 *Este campo es requerido  
                               </span> 
