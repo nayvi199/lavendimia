@@ -24,6 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+/*import {ConfirmationService} from 'primeng/api';*/
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,8 @@ import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component'
     HttpClientModule,
     ToastModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    ConfirmDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

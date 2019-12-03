@@ -81,7 +81,9 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   }
 
   regresar() {
+    if (confirm('Desea salir de la pantalla actual?')) {
     this.router.navigate(['/clientes']);
+    }
   }
 
   enviar() {

@@ -6,10 +6,13 @@ import { IVenta } from '../models/venta';
   providedIn: 'root'
 })
 export class VentaServiceService {
-
   constructor(private httpClient: HttpClient) { }
 
+  /*public sendGetVentas(): Observable<any> {
+    return this.httpClient.get('/RESTful/webresources/venta/all');
+  }*/
   public sendGetVentas(): Observable<any> {
+    console.log('entro a sendGetClientes');
     return this.httpClient.get('/RESTful/webresources/venta/all');
   }
 

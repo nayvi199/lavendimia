@@ -59,10 +59,10 @@ export class RegisarticuloComponent implements OnInit, OnDestroy {
     this.articulosForm = this.fb.group(
       {
         id: {value: null, disabled: true},
-        desc_articulo : new FormControl('', Validators.required ),
-        desc_modelo : new FormControl('', Validators.required),
+        desc_articulo : new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]')] ),
+        desc_modelo : new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
         imp_precio : new FormControl('', Validators.required),
-        num_cantidad : new FormControl( '', Validators.required),
+        num_cantidad : new FormControl( '', Validators.required ),
       }
   );
   }
@@ -72,7 +72,8 @@ export class RegisarticuloComponent implements OnInit, OnDestroy {
   }
   obtenerNumeroRegistrar() {
     this.serviceL.sendGetFolioArticuloU().subscribe((resp) => {
-      this.nuevoregistro = resp.id_cliente;
+      this.nuevoregistro = (resp.id_articulo);
+      this.nuevoregistro++;
       console.log('nuevo registro' + this.nuevoregistro);
     });
   }
@@ -88,7 +89,9 @@ export class RegisarticuloComponent implements OnInit, OnDestroy {
   }
 
   regresar() {
+    if (confirm('Desea salir de la pantalla actual?')) {
     this.router.navigate(['/articulos']);
+    }
   }
 
   onRegisterSubmit(form) {

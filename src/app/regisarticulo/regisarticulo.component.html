@@ -47,7 +47,7 @@
                              <div class="form-group row">
                                  <label class="col-md-4 form-control-label text-success" for="imp_precio"><h4>Precio:</h4></label>
                                  <div class="col-md-8">
-                                   <input type="text" formControlName="imp_precio" class="form-control" name="imp_precio" placeholder="Ingrese Precio"/> 
+                                   <input type="number" formControlName="imp_precio" class="form-control" name="imp_precio" placeholder="Ingrese Precio"/> 
                                    <span *ngIf="articulosForm.controls['imp_precio'].invalid && articulosForm.controls['imp_precio'].touched" class="hepl-block text-danger">
                                      *Este campo es requerido  
                                    </span> 
@@ -56,7 +56,7 @@
                              <div class="form-group row">
                                  <label class="col-md-4 form-control-label text-success" for="num_cantidad"><h4>Existencia:</h4></label>
                                  <div class="col-md-8">
-                                   <input type="text" formControlName="num_cantidad" class="form-control" name="num_cantidad" placeholder="Ingrese Existencia"/> 
+                                   <input type="number" formControlName="num_cantidad" class="form-control" name="num_cantidad" placeholder="Ingrese Existencia"/> 
                                    <span *ngIf="articulosForm.controls['num_cantidad'].invalid && articulosForm.controls['num_cantidad'].touched" class="hepl-block text-danger">
                                      *Este campo es requerido  
                                    </span> 
@@ -68,7 +68,7 @@
                                    <i class="fa fa-ban"></i>
                                    Limpiar
                                  </button>
-                                 <button type="button" class="btn btn-lg btn-success" routerLink="/articulos">Cancelar</button>
+                                 <button type="button" class="btn btn-lg btn-success" (click)="regresar()">Cancelar</button>
                                  <button type="submit" class="btn btn-lg btn-success" [disabled]="!articulosForm.valid">Guardar</button>
                                </div>
                              </div> 
