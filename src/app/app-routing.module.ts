@@ -7,13 +7,14 @@ import { ClientesComponent } from './clientes/clientes.component';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegistrarclienteComponent } from './registrarcliente/registrarcliente.component';
+import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component';
 
 
 const routes: Routes = [
   { path: 'ventas', component: VentasComponent },
   { path: 'configuracion', component: ConfiguracionComponent},
-  { path: 'clientes', component: ClientesComponent},
-  { path: 'articulos', component: ArticulosComponent},
+  { path: 'clientes', component: ClientesComponent },
+  { path: 'articulos', component: ArticulosComponent },
   {
     path: 'home',
     component: HomeComponent
@@ -29,6 +30,15 @@ const routes: Routes = [
   {
     path: 'editarcliente/:id',
     component: RegistrarclienteComponent,
+    data : { title: 'editar' },
+  },
+  {
+    path: 'registrararticulo',
+    component: RegisarticuloComponent
+  },
+  {
+    path: 'registrararticulo/:id',
+    component: RegisarticuloComponent,
     data : { title: 'editar' },
   },
   {

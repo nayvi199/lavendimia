@@ -1,6 +1,6 @@
 {
     "/RESTful/*": {
-      "target": "http://localhost:8080",
+      "target": "http://miservidor.jvmhost.net:10168",
       "secure": false,
       "changeOrigin": true
     }

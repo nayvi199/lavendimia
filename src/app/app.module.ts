@@ -23,6 +23,7 @@ import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
+import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import {MessagesModule} from 'primeng/messages';
     NotFoundComponent,
     NavbarComponent,
     HomeComponent,
-    RegistrarclienteComponent
+    RegistrarclienteComponent,
+    RegisarticuloComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,1 +1,36 @@
-<p>articulos works!</p>
+<div class="container">
+    <div class="row" style="margin-top: 15px;">
+        <p-toast key="myKey2" position="top-right" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
+    </div>
+      <div class="row" style="margin-top: 15px;">
+          <div class="col-md-3">
+          <h4><strong><p class="text-info">Articulos Registrados</p></strong></h4>
+          </div>
+        <div class="col-md-3 offset-md-6">
+          <button type="button" class="btn btn-lg btn-primary" routerLink="/registrararticulo">
+            <i class="fa fa-plus"></i> Nuevo Articulo
+          </button>
+        </div>
+      </div>
+      <div class="row animated fadeIn" style="margin-top: 15px;">
+        <p-table [value]="articulos" [paginator]="true" [rows]="10">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Clave Articulo</th>
+              <th>Descripción</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-articulo>
+            <tr>
+              <td>{{ articulo.idu_articulo }}</td>
+              <td>{{ articulo.desc_articulo }}</td>
+              <td>
+                  <a href="#" [routerLink]="['/registrararticulo',articulo.idu_articulo]" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+                  <button (click)="eliminar(articulo.idu_articulo)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+              </td> 
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>

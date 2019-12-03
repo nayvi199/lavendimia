@@ -58,6 +58,9 @@ export class ServiceLService {
 
   // metodos para agregar
   public sendPostVenta(venta: IVenta): Observable<any> {
+    if (venta.idu_folio == null) {
+      venta.idu_folio = 0;
+    }
     return this.httpClient.post('/RESTful/webresources/venta/add', venta);
   }
   public sendPostCliente(cliente: ICliente): Observable<any> {
@@ -68,10 +71,17 @@ export class ServiceLService {
     return this.httpClient.post('/RESTful/webresources/generic/add/', cliente);
   }
   public sendPostArticulo(articulo: IArticulo): Observable<any> {
+    if (articulo.idu_articulo == null) {
+      articulo.idu_articulo = 0;
+    }
     return this.httpClient.post('/RESTful/webresources/articulo/add/', articulo);
   }
 
   public sendPostConfiguracion(confi: IConfiguracion): Observable<any> {
+    if (confi.idu_configuracion == null) {
+      confi.idu_configuracion = 0;
+
+    }
     return this.httpClient.post('/RESTful/webresources/confi/add/', confi);
   }
 
@@ -93,22 +103,18 @@ export class ServiceLService {
   // metodos para eliminar
   public sendDeleteVenta(id: number): Observable<any> {
     return this.httpClient.delete('/RESTful/webresources/venta/' + id);
-    // return this.http.get(´${this.apiUrl}/${num_empleado}´);
   }
 
   public sendDeleteArticulo(id: number): Observable<any> {
     return this.httpClient.delete('/RESTful/webresources/articulo/' + id);
-    // return this.http.get(´${this.apiUrl}/${num_empleado}´);
   }
 
   public sendDeleteConfiguracion(id: number): Observable<any> {
     return this.httpClient.delete('/RESTful/webresources/confi/' + id);
-    // return this.http.get(´${this.apiUrl}/${num_empleado}´);
   }
 
   public sendDeleteCliente(id: number): Observable<any> {
     return this.httpClient.delete('/RESTful/webresources/generic/' + id);
-    // return this.http.get(´${this.apiUrl}/${num_empleado}´);
   }
 
 
