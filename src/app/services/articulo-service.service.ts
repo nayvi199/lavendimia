@@ -8,32 +8,32 @@ import { IArticulo } from '../models/articulo';
 export class ArticuloServiceService {
 
   constructor(private httpClient: HttpClient) { }
-  public url = 'http://miservidor.jvmhost.net:10168';
+
   public sendGetArticulos(): Observable<any> {
-    return this.httpClient.get(this.url + '/RESTful/webresources/articulo/all');
+    return this.httpClient.get('/RESTful/webresources/articulo/all');
   }
 
   public sendGetArticulo(id: number, parametros?: any): Observable<any> {
-    return this.httpClient.get(this.url + '/RESTful/webresources/articulo/all/' + id, {params: parametros});
+    return this.httpClient.get('/RESTful/webresources/articulo/all/' + id, {params: parametros});
   }
 
   // Folio del nuevo articulo
   public sendGetFolioArticuloU(): Observable<any> {
-    return this.httpClient.get(this.url + '/RESTful/webresources/articulo/last');
+    return this.httpClient.get('/RESTful/webresources/articulo/last');
   }
 
   public sendPostArticulo(articulo: IArticulo): Observable<any> {
     if (articulo.idu_articulo == null) {
       articulo.idu_articulo = 0;
     }
-    return this.httpClient.post(this.url + '/RESTful/webresources/articulo/add/', articulo);
+    return this.httpClient.post('/RESTful/webresources/articulo/add/', articulo);
   }
 
   public sendPutArticulo(articulo: IArticulo): Observable<any> {
-    return this.httpClient.put(this.url + '/RESTful/webresources/articulo/', articulo);
+    return this.httpClient.put('/RESTful/webresources/articulo/', articulo);
   }
 
   public sendDeleteArticulo(id: number): Observable<any> {
-    return this.httpClient.delete(this.url + '/RESTful/webresources/articulo/' + id);
+    return this.httpClient.delete('/RESTful/webresources/articulo/' + id);
   }
 }
