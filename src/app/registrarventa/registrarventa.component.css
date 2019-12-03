@@ -1,0 +1,40 @@
+.container{
+    border: 1px solid #327AB8;
+    margin-top: 10%;
+}
+.header{
+    background-color: #327AB8;
+    color: white;
+    width:100%;
+    font-weight: bold;
+}
+.folio{
+    color: green;
+    margin-left: 82%;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+.box{
+    background-color: #327AB8;
+    color: white;
+    height: 3%;
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 2%;
+    padding-left: 0.6%;
+    padding-top: 0.5%;
+    margin-bottom: 1%;
+}
+.totales{
+    margin-left: 60%;
+    margin-top: 1%;
+    background-color: #BFBFBF;
+}
+thead{
+    background-color: #F0F4F3;
+}
+table{
+    width: 95%;
+    margin-top: 2%;
+    margin-left: 2.5%;
+}

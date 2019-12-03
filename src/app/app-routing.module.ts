@@ -8,7 +8,7 @@ import { ArticulosComponent } from './articulos/articulos.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { RegistrarclienteComponent } from './registrarcliente/registrarcliente.component';
 import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component';
-
+import { RegistrarventaComponent } from './registrarventa/registrarventa.component';
 
 const routes: Routes = [
   { path: 'ventas', component: VentasComponent },
@@ -40,6 +40,10 @@ const routes: Routes = [
     path: 'registrararticulo/:id',
     component: RegisarticuloComponent,
     data : { title: 'editar' },
+  },
+  {
+    path:'registrarVenta',
+    component:RegistrarventaComponent,
   },
   {
     path: '**',

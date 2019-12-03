@@ -25,6 +25,7 @@ import {MessageModule} from 'primeng/message';
 import {MessagesModule} from 'primeng/messages';
 import { RegisarticuloComponent } from './regisarticulo/regisarticulo.component';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { RegistrarventaComponent } from './registrarventa/registrarventa.component';
 /*import {ConfirmationService} from 'primeng/api';*/
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
     NavbarComponent,
     HomeComponent,
     RegistrarclienteComponent,
-    RegisarticuloComponent
+    RegisarticuloComponent,
+    RegistrarventaComponent
   ],
   imports: [
     BrowserAnimationsModule,

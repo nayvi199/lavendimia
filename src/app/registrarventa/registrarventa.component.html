@@ -1,0 +1,149 @@
+<div class="container">
+    <div class="row" style="margin-top: 15px;">
+        <p-toast key="myKey3" position="top-right" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'"></p-toast>
+    </div>
+    <div class="row header">
+        Registro de ventas
+    </div>
+    <div class="row folio">
+           Folio de venta: 000{{folio}}
+    </div>
+    <form>
+        <div class="row">
+            <div class="col-1 box">
+                Cliente:
+            </div>
+            <div class="col-5 form-group md-form">
+                <input type="search" id="form-autocomplete"  class="form-control mdb-autocomplete"
+                 [formControl]="clienteFormControl"  #nombreCliente>
+
+                <div *ngFor="let cliente of (filteredClientes | async)">
+                    <label for="form-autocomplete" (click)="getCliente(cliente)" class="active">  {{ cliente.nombreCompleto}}</label>
+                </div>
+                
+            </div>
+            <div class="col-4 form-group" *ngIf="hasProp(cliente, 'RFC')">
+                RFC:{{cliente.RFC}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1 box">
+                Articulo: 
+            </div>
+            
+            <div class="col-5 form-group md-form">
+                <input type="search" id="articulo-autocomplete"  class="form-control mdb-autocomplete"
+                    [formControl]="articuloFormControl"  #nombreArticulo>
+
+                <div *ngFor="let articulo of (filteredArticulos | async)">
+                    <label for="form-autocomplete" (click)="getArticulo(articulo)" class="active">  {{ articulo.desc_articulo}}</label>
+                </div>
+                
+            </div>
+            <div class="col-2">
+                <button class="btn btn-light" (click)="agregar()"><i class="fa fa-plus" aria-hidden="true"></i>Agregar</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Descripción del articulo</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col-1">Cantidad</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Importe</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let producto of productos; let i= index;">
+
+                      <td>{{producto.articulo.desc_articulo}}</td>
+                      <td>{{producto.articulo.desc_modelo}}</td>
+                      <td>
+                          <input type="number" (change)="calculaImporte(i)" min=1 [(ngModel)]="producto.cantidad" 
+                          class="form-control" name="cantidadInput" id="cantidadInput">
+                      </td>
+                      <td>
+                            {{ producto.articulo.imp_precio | currency }}  
+                      </td>
+                      <td>{{producto.importe | currency }}</td>
+                      <td><button class="btn btn-danger" (click)="eliminar(i)"><i class="fa fa-trash-o"></i>Eliminar</button></td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row ">
+        <div class="col-2 totales">
+            Enganche:
+        </div>
+        <div class="col-2" style="margin-top: 5px;">
+            {{enganche | currency }}
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-2 totales">
+            Bonificación enganche:
+        </div>
+        <div class="col-2" style="margin-top: 5px;">
+            {{bonificacionEnganche | currency }}
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-2 totales">
+            Total:
+        </div>
+        <div class="col-2" style="margin-top: 5px;">
+            {{total | currency }}
+        </div>
+    </div>
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-1 offset-md-9">
+            <button class="btn btn-success" (click)="regresar()">Cancelar</button>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-success" (click)="siguiente()">Siguiente</button>
+        </div>    
+    </div>
+    
+    <div *ngIf="showPlazos">
+        <div class="row">
+            <table class="table">
+                <thead >
+                   ABONOS MENSUALES
+                </thead>
+                <tbody>
+                      
+
+                    <tr *ngFor="let abono of abonosMensuales;">
+                        <td>
+                            {{abono.num_meses}} ABONOS DE
+                        </td>
+                        <td>
+                            {{abono.imp_abono  | currency}}
+                        </td>
+                        <td>
+                            TOTAL A PAGAR {{abono.imp_totalPagar  | currency}}
+                        </td>
+                        <td>
+                            SE AHORRA {{abono.imp_ahorro  | currency}}
+                        </td>
+                        <td>
+                            <input type="radio" name="numPagos" (change)="guardaAbono(abono)">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row" style="margin-left: 65%;">
+                <div class="col-6">
+                    <button class="btn btn-lg btn-success" (click)="regresar()">Cancelar</button>
+                </div> 
+                <div class="col-6">
+                    <button class="btn btn-lg btn-success" (click)="guardarVenta()">Guardar</button>
+                </div>         
+            </div>
+        </div>
+    </div>
+</div>
