@@ -14,7 +14,7 @@ export class ClientesServiceService {
     console.log('entro a sendGetClientes');
     return this.httpClient.get('/RESTful/webresources/generic/all');
   }
-  
+
   public sendGetCliente(id: number, parametros?: any): Observable<any> {
     console.log('entro a sendGetCliente');
     return this.httpClient.get('/RESTful/webresources/generic/all/' + id, {params: parametros});
@@ -35,4 +35,10 @@ export class ClientesServiceService {
   public sendDeleteCliente(id: number): Observable<any> {
     return this.httpClient.delete('/RESTful/webresources/generic/' + id);
   }
+
+  // ultimo folio
+  public sendGetFolioClienteU(): Observable<any> {
+    return this.httpClient.get('/RESTful/webresources/generic/last');
+  }
+
 }

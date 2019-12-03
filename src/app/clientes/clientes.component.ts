@@ -1,10 +1,10 @@
 import { ICliente } from './../models/cliente';
-import { ServiceLService } from './../services/service-l.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import swal from 'sweetalert2';
 import {MessageService} from 'primeng/api';
+import { ClientesServiceService } from '../services/clientes-service.service';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
@@ -22,7 +22,7 @@ export class ClientesComponent implements OnInit {
     },
     buttonsStyling: false
   });
-  constructor(private http: HttpClient, private serviceL: ServiceLService,
+  constructor(private http: HttpClient, private serviceL: ClientesServiceService,
               private messageService: MessageService) { }
 
   ngOnInit() {

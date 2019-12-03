@@ -3,12 +3,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 import { IArticulo } from '../models/articulo';
-import { ServiceLService } from '../services/service-l.service';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
 import {MessageService} from 'primeng/api';
 import {Message} from 'primeng//api';
 import { Subscription } from 'rxjs';
+import { ArticuloServiceService } from '../services/articulo-service.service';
 
 @Component({
   selector: 'app-regisarticulo',
@@ -29,7 +29,7 @@ export class RegisarticuloComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private http: HttpClient,
-              private serviceL: ServiceLService,
+              private serviceL: ArticuloServiceService,
               private messageService: MessageService
   ) { }
 
@@ -91,7 +91,7 @@ export class RegisarticuloComponent implements OnInit, OnDestroy {
     this.router.navigate(['/articulos']);
   }
 
-  onRegisterSubmit(form){
+  onRegisterSubmit(form) {
     const id = form.getRawValue().id;
     // Insertar datos nuevos a Interfaz
     this.articuloNU = { idu_articulo: id,

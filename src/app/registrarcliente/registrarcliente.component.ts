@@ -3,11 +3,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 import { ICliente } from '../models/cliente';
-import { ServiceLService } from '../services/service-l.service';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
 import {MessageService} from 'primeng/api';
 import {Message} from 'primeng//api';
+import { ClientesServiceService } from '../services/clientes-service.service';
 
 @Component({
   selector: 'app-registrarcliente',
@@ -33,7 +33,7 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private http: HttpClient,
-              private serviceL: ServiceLService,
+              private serviceL: ClientesServiceService,
               private messageService: MessageService
     ) { }
 
@@ -125,13 +125,13 @@ export class RegistrarclienteComponent implements OnInit, OnDestroy {
   }
 
   showSuccess() {
-    this.msgs.push({severity:'info', summary:'Info Message', detail:'PrimeNG rocks'});
+    this.msgs.push({severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks'});
     // this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
 }
 
   /*Forma de Llamarse
-  <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno" 
-  placeholder="Ingrese Apellido Paterno:" (ngModelChange)="onChangeServicio($event)"/> 
+  <input type="text" formControlName="ape_paterno" class="form-control" name="ape_paterno"
+  placeholder="Ingrese Apellido Paterno:" (ngModelChange)="onChangeServicio($event)"/>
   */
 
   autoCompletarRFC() {

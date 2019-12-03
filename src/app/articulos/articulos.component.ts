@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { IArticulo } from './../models/articulo';
-import { ServiceLService } from './../services/service-l.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import swal from 'sweetalert2';
 import {MessageService} from 'primeng/api';
+import { ArticuloServiceService } from '../services/articulo-service.service';
 
 @Component({
   selector: 'app-articulos',
@@ -21,7 +21,7 @@ export class ArticulosComponent implements OnInit {
     },
     buttonsStyling: false
   });
-  constructor(private http: HttpClient, private serviceL: ServiceLService,
+  constructor(private http: HttpClient, private serviceL: ArticuloServiceService,
               private messageService: MessageService) { }
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class ArticulosComponent implements OnInit {
     }).then((result) => {
       if (result.value) {
         // mandar llamar el servicio
-        this.serviceL.sendDeleteCliente(id).subscribe( (resp) => {
+        this.serviceL.sendDeleteArticulo(id).subscribe( (resp) => {
           this.messageService.add({ key: 'myKey2', severity: 'success', summary: 'Notificacion',
            detail: 'Bien Hecho. El Articulo ha sido eliminado correctamente.'});
         },
